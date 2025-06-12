@@ -90,6 +90,7 @@ def create_postgres_agent(environment: str):
         description=f"An AI agent that can query the Identity Service {environment} database and perform database operations.",
         tools=[postgres_tool],
         show_tool_calls=True,
+        markdown=True,
     )
 
 @tool(
@@ -134,7 +135,7 @@ def query_production_db(query: str) -> str:
     return result.content
 
 
-def create_router_agent():
+def get_identity_service_db_agent():
     """Create a router agent that can select between staging and production databases
     based on the user's query content.
     
@@ -147,11 +148,12 @@ def create_router_agent():
         description="An AI agent that can route queries to either staging or production Identity Service databases based on the query content.",
         tools=[query_staging_db, query_production_db],
         show_tool_calls=True,
+        markdown=True,
     )
-
 
 def main():
     """Main entry point for the script."""
+    print("hereee")
     # Check if enough arguments were provided
     # if len(sys.argv) < 2:
     #     print("Usage: python postgres_agent.py \"<query>\"")
@@ -162,27 +164,27 @@ def main():
     # query = sys.argv[1]
     
     # Create the router agent that can select between staging and production db based on the query content
-    router_agent = create_router_agent()
+    identity_service_db_agent = get_identity_service_db_agent()
     
     # Run the query through the router agent which will select the appropriate tool
     # print("The agent will automatically select between Identity Service staging or production database based on your query.")
     query = "How many users are mapped with Supply Manager role in staging db"
-    result = router_agent.run(query)
+    result = identity_service_db_agent.run(query)
     print("Query: ", query)
     print("\n")
     print(result.content)
 
-    query = "How many users are mapped with Supply Manager role in production db"
-    result = router_agent.run(query)
-    print("Query: ", query)
-    print("\n")
-    print(result.content)
+    # query = "How many users are mapped with Supply Manager role in production db"
+    # result = identity_service_db_agent.run(query)
+    # print("Query: ", query)
+    # print("\n")
+    # print(result.content)
 
-    query = "How many users are mapped with Supply Manager role in staging db"
-    result = router_agent.run(query)
-    print("Query: ", query)
-    print("\n")
-    print(result.content)
+    # query = "How many users are mapped with Supply Manager role in staging db"
+    # result = identity_service_db_agent.run(query)
+    # print("Query: ", query)
+    # print("\n")
+    # print(result.content)
 
 if __name__ == "__main__":
     main()
