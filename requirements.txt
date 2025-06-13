@@ -5,4 +5,4 @@ psycopg2
 sqlalchemy
 fastapi[standard]
 uvicorn
-duckduckgo-search
+pygithub

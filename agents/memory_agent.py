@@ -14,7 +14,7 @@ db_url = "postgresql://ramyakvr:@localhost:5432/personal_assistant"
 # ************* Memory *************
 memory = Memory(
     model=OpenAIChat(id="gpt-4o"),
-    db=PostgresMemoryDb(table_name="user_memories", db_url=db_url),
+    db=PostgresMemoryDb(table_name="memory_agent_memories", db_url=db_url),
     delete_memories=True,
     clear_memories=True,
 )

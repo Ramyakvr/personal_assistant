@@ -153,7 +153,6 @@ def get_identity_service_db_agent():
 
 def main():
     """Main entry point for the script."""
-    print("hereee")
     # Check if enough arguments were provided
     # if len(sys.argv) < 2:
     #     print("Usage: python postgres_agent.py \"<query>\"")
