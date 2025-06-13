@@ -7,7 +7,6 @@ environments using the Agno framework.
 """
 
 import os
-import sys
 from typing import Dict, Any
 
 from dotenv import load_dotenv
@@ -151,39 +150,8 @@ def get_identity_service_db_agent():
         markdown=True,
     )
 
-def main():
-    """Main entry point for the script."""
-    # Check if enough arguments were provided
-    # if len(sys.argv) < 2:
-    #     print("Usage: python postgres_agent.py \"<query>\"")
-    #     print("Example: python postgres_agent.py \"What tables are in the Identity Service staging database?\"")
-    #     sys.exit(1)
-        
-    # # Get the query from command line arguments
-    # query = sys.argv[1]
-    
-    # Create the router agent that can select between staging and production db based on the query content
-    identity_service_db_agent = get_identity_service_db_agent()
-    
-    # Run the query through the router agent which will select the appropriate tool
-    # print("The agent will automatically select between Identity Service staging or production database based on your query.")
-    query = "How many users are mapped with Supply Manager role in staging db"
-    result = identity_service_db_agent.run(query)
-    print("Query: ", query)
-    print("\n")
-    print(result.content)
-
-    # query = "How many users are mapped with Supply Manager role in production db"
-    # result = identity_service_db_agent.run(query)
-    # print("Query: ", query)
-    # print("\n")
-    # print(result.content)
-
-    # query = "How many users are mapped with Supply Manager role in staging db"
-    # result = identity_service_db_agent.run(query)
-    # print("Query: ", query)
-    # print("\n")
-    # print(result.content)
-
 if __name__ == "__main__":
-    main()
+    import sys
+    query = sys.argv[1] if len(sys.argv) > 1 else "How many users are mapped with Supply Manager role in staging db"
+    identity_service_db_agent = get_identity_service_db_agent()
+    identity_service_db_agent.print_response(query, markdown=True)

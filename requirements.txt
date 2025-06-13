@@ -1,8 +1,9 @@
 agno==1.5.6
-openai==1.83.0
+openai==1.83.0  
 python-dotenv
 psycopg2
 sqlalchemy
 fastapi[standard]
 uvicorn
 pygithub
+jira
