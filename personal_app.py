@@ -7,13 +7,16 @@ environments using the Agno framework.
 """
 
 from agents.identity_service_agent import get_identity_service_db_agent
+from agents.github_agent import get_github_agent
 from agents.memory_agent import get_memory_agent
 from agno.playground import Playground, serve_playground_app
 
 identity_service_db_agent = get_identity_service_db_agent()
+github_agent = get_github_agent()
 memory_agent = get_memory_agent()
 app = Playground(
     agents=[
+        github_agent,
         identity_service_db_agent,
         memory_agent
     ],
